@@ -1,0 +1,15 @@
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\bin\Debug\net6.0\trabalho_AED.exe
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\bin\Debug\net6.0\trabalho_AED.deps.json
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\bin\Debug\net6.0\trabalho_AED.runtimeconfig.json
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\bin\Debug\net6.0\trabalho_AED.dll
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\bin\Debug\net6.0\trabalho_AED.pdb
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.csproj.AssemblyReference.cache
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.GeneratedMSBuildEditorConfig.editorconfig
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.AssemblyInfoInputs.cache
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.AssemblyInfo.cs
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.csproj.CoreCompileInputs.cache
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.dll
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\refint\trabalho_AED.dll
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.pdb
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\trabalho_AED.genruntimeconfig.cache
+K:\.ARQUIVOS DO USUÁRIO\Desktop\Faculdade SI\Segundo período\AED\Trabalho\trabalho_AED\obj\Debug\net6.0\ref\trabalho_AED.dll
