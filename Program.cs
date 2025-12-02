@@ -4,48 +4,70 @@ using System.Dynamic;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 
-class Pessoa
+class Organizations
 {
-    public string Nome {get; set;}
+    public int indexador {get; private set;}
+    public string organizaçãoID {get; private set;}
+    public string organizaçãoNome {get; set;}
+    public string website {get; set;}
+    public string país {get; set;}
+    public string descrição {get; set;}
+    public string dataFundação {get; set;}
+    public string indústria {get; set;}
+    public int númeroFuncionários {get; set;}
 
-    public string Código {get; private set;}
-
-    public string Telefone {get; set;}
-
-    public Pessoa(string _Nome, string _Telefone)
+    public Organizations(int _index, string _organizaçãoID, string _organizaçãoNome, string _website, string _país, string _descrição, string _dataFundação, string _indústria, int _númeroFuncionários)
     {
-        Nome = _Nome;
-        Código = geraCódigo();
-        Telefone = _Telefone;
+        indexador = _index;
+        organizaçãoID = _organizaçãoID;
+        organizaçãoNome = _organizaçãoNome;
+        website = _website;
+        país = _país;
+        descrição = _descrição;
+        dataFundação = _dataFundação;
+        indústria = _indústria;
+        númeroFuncionários = _númeroFuncionários;
     }
 
-    public string geraCódigo()
-    {
-        string _Código = "";
-        Random X = new Random();
-        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-        for (int i = 0; i < 4; i++)
-            _Código += chars[X.Next(0, chars.Length)];
-        
-        return _Código;
-    }
-
-    public static Pessoa cadastroNovaPessoa()
+    public static Organizations cadastroEmpresaManual(int _index) //Apenas para testes, não necessário para a versão final
     {
         Console.Clear(); //Limpando a tela
 
+        Console.WriteLine($"ATENÇÃO! ATENÇÃO! ATENÇÃO!");
+        Console.WriteLine($"Essa página serve apenas para teste de implementação e visualização!\n");
+        Console.ReadKey();
+
         Console.WriteLine($"===================");
-        Console.WriteLine($"Cadastro de Usuário");
+        Console.WriteLine($"Cadastro de Empresa");
         Console.WriteLine($"===================\n");
 
-        Console.Write($"Nome....: ");
-        string _Nome = Console.ReadLine();
+        Console.WriteLine($"Indexação..........: {_index}");
 
-        Console.Write($"Telefone: ");
-        string _Telefone = Console.ReadLine();
+        Console.Write($"ID da organização..: ");
+        string _organizaçãoID = Console.ReadLine();
 
-        return new Pessoa(_Nome, _Telefone);
+        Console.Write($"Nome da organização: ");
+        string _organizaçãoNome = Console.ReadLine();
+
+        Console.Write($"Website............: ");
+        string _website = Console.ReadLine();
+
+        Console.Write($"País de origem.....: ");
+        string _país = Console.ReadLine();
+
+        Console.Write($"Descrição..........: ");
+        string _descrição = Console.ReadLine();
+
+        Console.Write($"Data de Fundação...: ");
+        string _dataFundação = Console.ReadLine();
+
+        Console.Write($"Indústria..........: ");
+        string _indústria = Console.ReadLine();
+
+        Console.Write($"Nº de funcionários.: ");
+        int _númeroFuncionários = int.Parse(Console.ReadLine());
+
+        return new Organizations(_index, _organizaçãoID, _organizaçãoNome, _website, _país, _descrição, _dataFundação, _indústria, _númeroFuncionários);
     }
 }
 
@@ -55,7 +77,7 @@ class Program
     {
         Console.Clear(); //Limpando a tela
 
-        List<Pessoa> cadastros = new List<Pessoa>();
+        List<Organizations> empresas = new List<Organizations>();
         int Def = 0;
         do
         {
@@ -71,9 +93,9 @@ class Program
 
             switch (Def)
             {
-                case 1:
-                Pessoa cadastro = Pessoa.cadastroNovaPessoa();
-                cadastros.Add(cadastro);
+                case 1: //Apenas para testes, não necessário para a versão final
+                Organizations cadastro = Organizations.cadastroEmpresaManual(empresas.Count + 1);
+                empresas.Add(cadastro);
                 Console.WriteLine("Cadastro criado com sucesso!");
                 Console.ReadKey();
                 Console.Clear();
@@ -81,11 +103,12 @@ class Program
 
                 case 2:
                 Console.Clear();
-                foreach (Pessoa info in cadastros)
+                foreach (Organizations info in empresas)
                     {
-                        Console.WriteLine($"Pessoa: {info.Nome}");
-                        Console.WriteLine($"Código: {info.Código}");
-                        Console.WriteLine($"Telefone: {info.Telefone}");
+                        Console.WriteLine($"Nome da organização: {info.organizaçãoNome}");
+                        Console.WriteLine($"ID da organização..: {info.organizaçãoID}");
+                        Console.WriteLine($"Descrição..........: {info.descrição}");
+                        Console.WriteLine($"Indústria..........: {info.indústria}");
                         Console.WriteLine();
                     }
                     Console.ReadKey();
