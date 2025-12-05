@@ -3,71 +3,79 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks.Dataflow;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-class Organizations
+public class Pessoa
 {
-    public int indexador {get; private set;}
-    public string organizaçãoID {get; private set;}
-    public string organizaçãoNome {get; set;}
-    public string website {get; set;}
-    public string país {get; set;}
-    public string descrição {get; set;}
-    public string dataFundação {get; set;}
-    public string indústria {get; set;}
-    public int númeroFuncionários {get; set;}
+    public int Index { get; set; }
+    public string UserId { get; set; }
+    public string FN { get; set; } // first name
 
-    public Organizations(int _index, string _organizaçãoID, string _organizaçãoNome, string _website, string _país, string _descrição, string _dataFundação, string _indústria, int _númeroFuncionários)
+    public string LN { get; set; } // Last name
+
+    public string Sexo { get; set; }
+
+    public string Email { get; set; }
+
+    public string Telefone { get; set; }
+
+    public string DDA { get; set; } // data de aniversario
+
+    public string JB { get; set; } //empresa
+
+    public Pessoa(string[] dados)
     {
-        indexador = _index;
-        organizaçãoID = _organizaçãoID;
-        organizaçãoNome = _organizaçãoNome;
-        website = _website;
-        país = _país;
-        descrição = _descrição;
-        dataFundação = _dataFundação;
-        indústria = _indústria;
-        númeroFuncionários = _númeroFuncionários;
+        Index = int.Parse(dados[0]);
+        UserId = dados[1];
+        FN = dados[2];
+        LN = dados[3];
+        Sexo = dados[4];
+        Email = dados[5];
+        Telefone = dados[6];
+        DDA = dados[7];
+        JB = dados[8];
     }
+}
 
-    public static Organizations cadastroEmpresaManual(int _index) //Apenas para testes, não necessário para a versão final
+public class LeitorDeArquivo
+{
+    // Método para ler o arquivo e retornar a lista de pessoas
+    public static List<Pessoa> LerArquivoPessoas(string caminhoDoArquivo)
     {
-        Console.Clear(); //Limpando a tela
+        List<Pessoa> lista = new List<Pessoa>();
 
-        Console.WriteLine($"ATENÇÃO! ATENÇÃO! ATENÇÃO!");
-        Console.WriteLine($"Essa página serve apenas para teste de implementação e visualização!\n");
-        Console.ReadKey();
+        try
+        {
+            using (FileStream entrada = File.OpenRead(caminhoDoArquivo))
+            using (StreamReader leitor = new StreamReader(entrada))
+            {
+                string linha;
 
-        Console.WriteLine($"===================");
-        Console.WriteLine($"Cadastro de Empresa");
-        Console.WriteLine($"===================\n");
+                Console.WriteLine("\nAguarde... Lendo o arquivo...");
 
-        Console.WriteLine($"Indexação..........: {_index}");
+                while ((linha = leitor.ReadLine()) != null)
+                {
+                    string[] linhaPessoa = linha.Split(',');
+                    Pessoa pessoa = CriaPessoa(linhaPessoa);
+                    lista.Add(pessoa);
+                }
+            }
 
-        Console.Write($"ID da organização..: ");
-        string _organizaçãoID = Console.ReadLine();
+            Console.WriteLine("Arquivo lido com sucesso!");
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("\nERRO: Arquivo não existe");
+        }
 
-        Console.Write($"Nome da organização: ");
-        string _organizaçãoNome = Console.ReadLine();
-
-        Console.Write($"Website............: ");
-        string _website = Console.ReadLine();
-
-        Console.Write($"País de origem.....: ");
-        string _país = Console.ReadLine();
-
-        Console.Write($"Descrição..........: ");
-        string _descrição = Console.ReadLine();
-
-        Console.Write($"Data de Fundação...: ");
-        string _dataFundação = Console.ReadLine();
-
-        Console.Write($"Indústria..........: ");
-        string _indústria = Console.ReadLine();
-
-        Console.Write($"Nº de funcionários.: ");
-        int _númeroFuncionários = int.Parse(Console.ReadLine());
-
-        return new Organizations(_index, _organizaçãoID, _organizaçãoNome, _website, _país, _descrição, _dataFundação, _indústria, _númeroFuncionários);
+        return lista;
+    }
+    private static Pessoa CriaPessoa(string[] dados)
+    {
+        return new Pessoa(dados);
     }
 }
 
@@ -75,9 +83,100 @@ class Program
 {
     static void Main(string[] args)
     {
+
+        Console.WriteLine("Qual arquivo você gostaria de abrir:");
+        Console.WriteLine("1:arquivo com 100 pessoas");
+        Console.WriteLine("2:arquivo com 1.000 pessoas");
+        Console.WriteLine("3:arquivo com 10.000");
+        Console.WriteLine("4:arquivo com 100.000");
+        Console.WriteLine("5:arquivo com 500.000");
+        Console.WriteLine("6:arquivo com 1.000.000");
+        Console.WriteLine("7:arquivo com 5.000.000");
+        int escolha = int.Parse(Console.ReadLine());
+
+        if (escolha == 1)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 100 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+            
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else if (escolha == 2)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 1.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else if (escolha == 3)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 10.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else if (escolha == 4)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 100.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else if (escolha == 5)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 500.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else if (escolha == 6)
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 1.000.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+        else
+        {
+            string caminhoDoArquivo = @"";//caminho do arquivo com 2.000.000 pessoas
+            List<Pessoa> listaDePessoas = LeitorDeArquivo.LerArquivoPessoas(caminhoDoArquivo);
+
+
+            foreach (Pessoa pessoa in listaDePessoas)
+            {
+                Console.WriteLine($"index:{pessoa.Index},ID:{pessoa.UserId},primeiro nome:{pessoa.FN},segundo nome:{pessoa.LN},sexo:{pessoa.Sexo},email:{pessoa.Email},telefone:{pessoa.Telefone},Data de aniversario:{pessoa.DDA},emprego:{pessoa.JB}");
+            }
+        }
+    }
+
+        
         Console.Clear(); //Limpando a tela
 
-        List<Organizations> empresas = new List<Organizations>();
+        List<Pessoas> empresas = new List<Pessoas>();
         int Def = 0;
         do
         {
@@ -94,7 +193,7 @@ class Program
             switch (Def)
             {
                 case 1: //Apenas para testes, não necessário para a versão final
-                Organizations cadastro = Organizations.cadastroEmpresaManual(empresas.Count + 1);
+                Pessoas cadastro = Pessoas.cadastroEmpresaManual(empresas.Count + 1);
                 empresas.Add(cadastro);
                 Console.WriteLine("Cadastro criado com sucesso!");
                 Console.ReadKey();
@@ -103,10 +202,10 @@ class Program
 
                 case 2:
                 Console.Clear();
-                foreach (Organizations info in empresas)
+                foreach (Pessoas info in empresas)
                     {
-                        Console.WriteLine($"Nome da organização: {info.organizaçãoNome}");
-                        Console.WriteLine($"ID da organização..: {info.organizaçãoID}");
+                        Console.WriteLine($"Nome da organização: {info.PessoasNome}");
+                        Console.WriteLine($"ID da organização..: {info.PessoasID}");
                         Console.WriteLine($"Descrição..........: {info.descrição}");
                         Console.WriteLine($"Indústria..........: {info.indústria}");
                         Console.WriteLine();
