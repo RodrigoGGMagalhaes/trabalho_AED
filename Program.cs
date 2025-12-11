@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Dynamic;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 class Organizations
@@ -32,10 +33,6 @@ class Organizations
     public static Organizations cadastroEmpresaManual(int _index) //Apenas para testes, não necessário para a versão final
     {
         Console.Clear(); //Limpando a tela
-
-        Console.WriteLine($"ATENÇÃO! ATENÇÃO! ATENÇÃO!");
-        Console.WriteLine($"Essa página serve apenas para teste de implementação e visualização!\n");
-        Console.ReadKey();
 
         Console.WriteLine($"===================");
         Console.WriteLine($"Cadastro de Empresa");
@@ -81,9 +78,12 @@ class Program
         int Def = 0;
         do
         {
+            Console.WriteLine(); //Corrigir um erro onde uma das linhas é pulada no terminal, por algum motivo...
             Console.WriteLine($"Aplicação AED");
             Console.WriteLine($"1 - Criar Cadastro");
-            Console.WriteLine($"2 - Mostrar Cadastros");
+            Console.WriteLine($"2 - Listar Cadastros");
+            Console.WriteLine($"3 - Pesquisar Cadastro");
+            Console.WriteLine($"4 - Excluir Cadastro");
             Console.WriteLine($"9 - Sair");
 
             Console.Write("Opção: ");
@@ -113,6 +113,65 @@ class Program
                     }
                     Console.ReadKey();
                     Console.Clear();
+                break;
+
+                case 3:
+                Console.Clear();
+                Console.WriteLine($"Insira um ID para ser procurado: ");
+                Console.Write("ID: ");
+                string escolhaProcura = Console.ReadLine();
+
+                foreach (Organizations info in empresas)
+                    {
+                        if (escolhaProcura == info.organizaçãoID)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"Nome: {info.organizaçãoNome}");
+                            Console.WriteLine($"Website: {info.website}");
+                            Console.WriteLine($"País: {info.país}");
+                            Console.WriteLine($"Descrição: {info.descrição}");
+                            Console.WriteLine($"Fundação: {info.dataFundação}");
+                            Console.WriteLine($"Indústria: {info.indústria}");
+                            Console.WriteLine($"Nº de Funcionários: {info.númeroFuncionários}");
+                        }
+
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                break;
+
+                case 4:
+                Console.Clear();
+                Console.WriteLine($"Insira um ID para ser excluído: ");
+                Console.Write($"ID: ");
+                string escolhaExcluir = Console.ReadLine();
+                Organizations alvo = null;
+
+                foreach (Organizations info in empresas)
+                {
+                    if (escolhaExcluir == info.organizaçãoID)
+                        {
+                            Console.WriteLine($"ID encontrado!");
+                            Console.WriteLine($"Deseja excluir a empresa: {info.organizaçãoNome} (Y/N)?");
+                            Console.Write("Opção: ");
+                            char verificador = char.Parse(Console.ReadLine());
+
+                            if ((verificador == 'y') || (verificador == 'Y'))
+                            {
+                                alvo = info;
+                                break;
+                            }
+                        }
+                }
+
+                if (alvo != null)
+                {
+                    empresas.Remove(alvo);
+                    Console.WriteLine();
+                    Console.WriteLine($"Cadastro excluído com sucesso!");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
                 break;
 
                 case 9:
