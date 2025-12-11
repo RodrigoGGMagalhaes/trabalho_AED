@@ -2,11 +2,10 @@
 ## Repositório para salvar o trabalho de AED (Algoritmos e Estrutura de Dados)
 
 ## Integrantes do grupo:
-
-Bernardo Cardoso Reis
-Pedro Diniz
-Rodrigo Gonçalves Giancott Magalhães
-Wallas
+• Bernardo Cardoso Reis
+• Pedro Henrique Corrêa Diniz
+• Rodrigo Gonçalves Giancott Magalhães
+• Wallas Rodrigues Pereira
 
 # DEVLOG
 
@@ -20,3 +19,6 @@ Wallas
 "Tivemos um erro quanto ao progresso do Projeto. Retomarei o serivço para finalizar a implementação das funções, porém vou utilizar do auxílio de inteligência artificial quando for realizar a implementação da leitura do arquivo CSV." - Rodrigo
 
 "Implementação das funções para busca individual e exclusão dentro da lista, ambas em funcionamento. Necessário agora somente a leitura de arquivo CSV de diversos tamanhos." - Rodrigo
+
+## 11/12/2025
+"Finalização do trabalho. Foi implementado a leitura de dados com auxílio da inteligência artificial, assim como um sistema que define o número indexador (diferente do ID da empresa) com base no último número indexador ao invés de se basear na quantidade de elementos dentro da lista. Com isso, o processo de trabalho foi definitivamente encerrado!"
